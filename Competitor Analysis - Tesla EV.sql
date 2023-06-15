@@ -1,3 +1,4 @@
+/* Analysis to determine the ranking of 'Mkt_Cap' within top 25, '24h volume' within top 50 and '7 day%' increase highest and positive */
 
 SELECT *
 FROM (
