@@ -1,17 +1,17 @@
 /* Analysis to determine the ranking of 'Mkt_Cap' within top 25, '24h volume' within top 50 and '7 day%' increase highest and positive */
 
-# select all columns from the Cryptocurrency_Table 
-SELECT *
-# start a subquery selecting specific columns from the Cryptocurrency_Table and performing ranking within the subquery
+/* select all columns from the Cryptocurrency_Table */
+SELECT 
+/* start a subquery selecting specific columns from the Cryptocurrency_Table and perform ranking within the subquery */
 FROM (
   SELECT Coin, Mkt_Cap,[_1h],[_24h],[_7d],
-# calculates the rank of each row based on the descending order of the Mkt_Cap (market capitalization) column
+/* calculates the rank of each row based on the descending order of the Mkt_Cap (market capitalization) column */
     RANK() OVER (ORDER BY Mkt_Cap DESC) AS Mkt_Cap_rank,
-# calculates the rank of each row based on the descending order of the _24h (24-hour trading volume) column
+/* calculates the rank of each row based on the descending order of the _24h (24-hour trading volume) column */
     RANK() OVER (ORDER BY _24h DESC) AS Vol_rank
   FROM [dbo].[Crypto_SQL_data_csv]
-# filter data to only include rows where the Mkt_Cap (market capitalization) is greater than or equal to 2754035669
+/* filter data to only include rows where the Mkt_Cap (market capitalization) is greater than or equal to 2754035669 */
   WHERE Mkt_Cap >= 2754035669
 ) AS subquery
-# this sorts the overall result of the subquery again in descending order based on the Mkt_Cap (market capitalization) column
+/* this sorts the overall result of the subquery again in descending order based on the Mkt_Cap (market capitalization) column */
 ORDER BY Mkt_Cap DESC;
